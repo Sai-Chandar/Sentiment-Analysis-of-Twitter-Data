@@ -2,13 +2,13 @@ import tweepy
 from hidden import *
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import argparse
-def twitter_Authentication():
+def twitter_Authentication(): #Twitter API authentication
     global api
-    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)  #Make sure to enter Consumer key, consumer secret
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)   #access token, access token secret in hidden.py
     api = tweepy.API(auth)
 
-def hashtag_search(hashtag):
+def hashtag_search(hashtag): #Searches through the hashtag and returens args.num tweets
     tweets = tweepy.Cursor(api.search, q= hashtag, tweet_mode = 'extended', result_type = 'mixed').items(args.num)
     return tweets
 def User_comment_search(user_name):
@@ -20,7 +20,7 @@ def User_comment_search(user_name):
                 if tweet.in_reply_to_status_id_str == full_tweet.id_str:
                     return tweets.append(tweet)
 
-def Sentiment_scores(tweets):
+def Sentiment_scores(tweets):        #Sentiment scores using vader lexicon for the tweets
         Analyzer = SentimentIntensityAnalyzer()
         for tweet in tweets:
             vs = Analyzer.polarity_scores(tweet.full_text)
