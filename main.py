@@ -15,10 +15,11 @@ def User_comment_search(user_name):                            #Searches  throug
     tweets = list()
     recent_tweet = tweepy.Cursor(api.user_timeline, user_name).items(args.num)
     for full_tweet in recent_tweet:
-        for tweet in tweepy.Cursor(api.search, q="to:"+user_name, tweet_mode = 'extended', result_type = "recent").items(1000):
+        for tweet in tweepy.Cursor(api.search, q="to:"+user_name, tweet_mode = 'extended', result_type = "recent").items(150):
             if hasattr(tweet, 'in_reply_to_status_id_str'):
                 if tweet.in_reply_to_status_id_str == full_tweet.id_str:
-                    return tweets.append(tweet)
+                    tweets.append(tweet)
+    return tweets
 
 def Sentiment_scores(tweets):                                  #Sentiment scores using vader lexicon for the tweets
         Analyzer = SentimentIntensityAnalyzer()
@@ -41,4 +42,10 @@ if __name__ == '__main__':
         Sentiment_scores(tweets)
     if args.user_name:
         tweets = User_comment_search(args.user_name)
-        Sentiment_scores(tweets)
+        if len(tweets):
+            Sentiment_scores(tweets)
+        else:
+            print("No replies to the tweet yet.")
+    limits = api.rate_limit_status()                               #returns no of tokens left for this hour
+    remain_search_limits = limits['resources']['search']['/search/tweets']['remaining']
+    print( "remaining tokens left for this hour:", remain_search_limits )
