@@ -16,3 +16,17 @@ You'll need to download vader lexicon. To do that, open python console and
 `import nltk`
 
 `nltk.download('vader_lexicon')`
+
+---
+
+## Contributors
+
+- Saichandar Reddy Naini <n.saichander@gmail.com>
+
+---
+
+## License and copyright
+
+ © Saichandar Reddy Naini
+
+ Licensed under [MIT License](LICENSE).
