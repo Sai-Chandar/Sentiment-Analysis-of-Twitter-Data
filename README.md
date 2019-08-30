@@ -22,8 +22,6 @@ You'll need to download vader lexicon. To do that, open python console and
 
 To analyze a hashtag use -ht and mention number of tweets by -n.
 
-example:
-
 `python main.py -ht <hashtag> -n <number of tweets>`
 
 To analyze comments to a recent tweet from your business
@@ -40,6 +38,7 @@ Neutral Sentiment: -0.05 < score < 0.05
 Negative Sentiment: score <= -0.05
 
 For more information refer [vader_lexicon](https://github.com/cjhutto/vaderSentiment).
+
 ---
 ## Contributors
 
