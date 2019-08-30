@@ -9,8 +9,6 @@ You'll need python 3 with pip installed.
 
 `pip install tweepy`
 
-`pip install pandas`
-
 You'll need to download vader lexicon. To do that, open python console and
 
 `import nltk`
